@@ -1,0 +1,29 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from MainProcService WSDL service -->
+
+  <service name="MainProc" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://server.itsv"/>
+      <parameter name="wsdlServiceElement" value="MainProcService"/>
+      <parameter name="schemaQualified" value="http://server.itsv"/>
+      <parameter name="wsdlServicePort" value="MainProc"/>
+      <parameter name="className" value="itsv.server.MainProcSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="MainProc"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="addToStdString" qname="operNS:addToStdString" xmlns:operNS="http://server.itsv" returnQName="retNS:addToStdStringReturn" xmlns:retNS="http://server.itsv" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:param" xmlns:pns="http://server.itsv" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="addToStdString"/>
+
+  </service>
+</deployment>
